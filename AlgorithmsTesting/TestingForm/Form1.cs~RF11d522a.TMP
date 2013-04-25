@@ -1,0 +1,444 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.IO;
+using System.Threading;
+using EWAHBitmap;
+using bpluslib;
+using bitmap;
+using BuildingIndices;
+
+namespace TestingForm
+{
+    public partial class Form1 : Form
+    {
+        void reenterRun()
+        {
+            StreamWriter swriter = new StreamWriter(runFileName);
+            for (int i = 0; i < listBox1.Items.Count; i++)
+                swriter.WriteLine(listBox1.Items[i]);
+            swriter.Flush();
+            swriter.Close();
+        }
+
+        delegate void del(ref int count);
+        public void BulkLoad(ref int count)
+        {
+            long time;
+            textBox1.AppendText(System.Environment.NewLine + "Строим индексы:");
+            textBox1.Refresh(); ;
+            tree = new BplusTree(m, sortedKeys, listOfRids, out time);
+            textBox1.AppendText(System.Environment.NewLine + "B+ tree построено за " + time + " микросекунд");
+            textBox1.Refresh();
+            bulkLoadingElapsedTime[0] = time;
+            compressedBmp = new EWAHIndex(sortedKeys, listOfRids, out time);
+            textBox1.AppendText(System.Environment.NewLine + "Compressed Bitmap построено за " + time + " микросекунд");
+            textBox1.Refresh();
+            bulkLoadingElapsedTime[1] = time;
+            bmp = new BitmapIndex(sortedKeys, listOfRids, out time);
+            textBox1.AppendText(System.Environment.NewLine + "Bitmap построено за " + time + " микросекунд");
+            textBox1.Refresh();
+            bulkLoadingElapsedTime[2] = time;
+            textBox1.AppendText(System.Environment.NewLine + "------------------------------------");
+            textBox1.Refresh();
+        }
+        public void Put(ref int count)
+        {
+            long time;
+            textBox1.AppendText(String.Format(System.Environment.NewLine + "Добавляем запись ({0} {1}):", pairs[count].key, pairs[count].rid));
+            textBox1.Refresh();
+            tree.put(pairs[count].key, pairs[count].rid, out time);
+            textBox1.AppendText(System.Environment.NewLine + "Ключ добавлен в B+ tree за " + time + " микросекунд");
+            textBox1.Refresh();
+            addingElapsedTime[0].Add(time);
+            compressedBmp.Put(pairs[count].key, pairs[count].rid, out time);
+            textBox1.AppendText(System.Environment.NewLine + "Ключ добавлен в Compressed Bitmap за " + time + " микросекунд");
+            textBox1.Refresh();
+            addingElapsedTime[1].Add(time);
+            bmp.Put(pairs[count].key, pairs[count].rid, out time);
+            addingElapsedTime[2].Add(time);
+            textBox1.AppendText(System.Environment.NewLine + "Ключ добавлен в Bitmap за " + time + " микросекунд");
+            textBox1.AppendText(System.Environment.NewLine + "------------------------------------");
+            textBox1.Refresh();
+            count++;
+        }
+        public void Delete(ref int count)
+        {
+            long time;
+            textBox1.AppendText(System.Environment.NewLine + "Удаляем ключ " + pairs[count].key + ":");
+            textBox1.Refresh();
+            tree.delete(pairs[count].key, out time);
+            textBox1.AppendText(System.Environment.NewLine + "Ключ удалён из B+ tree за " + time + " микросекунд");
+            textBox1.Refresh();
+            deletionElapsedTime[0].Add(time);
+            compressedBmp.Delete(pairs[count].key, out time);
+            textBox1.AppendText(System.Environment.NewLine + "Ключ удалён из Compressed Bitmap за " + time + " микросекунд");
+            textBox1.Refresh();
+            deletionElapsedTime[1].Add(time);
+            bmp.Delete(pairs[count].key, out time);
+            deletionElapsedTime[2].Add(time);
+            textBox1.AppendText(System.Environment.NewLine + "Ключ удалён из Bitmap за " + time + " микросекунд");
+            textBox1.AppendText(System.Environment.NewLine + "------------------------------------");
+            textBox1.Refresh();
+            count++;
+        }
+        public void Search(ref int count)
+        {
+            long time;
+            textBox1.AppendText(System.Environment.NewLine + "Производим поиск ключа " + pairs[count].key + ":");
+            textBox1.Refresh();
+            tree.findFirst(pairs[count].key, out time);
+            textBox1.AppendText(System.Environment.NewLine + "Ключ найден в B+ tree за " + time + " микросекунд");
+            textBox1.Refresh();
+            searchingElapsedTime[0].Add(time);
+            compressedBmp.FindFirst(pairs[count].key, out time);
+            textBox1.AppendText(System.Environment.NewLine + "Ключ найден в Compressed Bitmap за " + time + " микросекунд");
+            textBox1.Refresh();
+            searchingElapsedTime[1].Add(time);
+            bmp.FindFirst(pairs[count].key, out time);
+            searchingElapsedTime[2].Add(time);
+            textBox1.AppendText(System.Environment.NewLine + "Ключ найден в Bitmap за " + time + " микросекунд");
+            textBox1.AppendText(System.Environment.NewLine + "------------------------------------");
+            textBox1.Refresh();
+            count++;
+        }
+        public void AddTest(string testName)
+        {
+            StreamWriter swriter = new StreamWriter(runFileName, true);
+            swriter.WriteLine(testName);
+            swriter.Flush();
+            swriter.Close();
+            listBox1.Items.Add(testName);
+        }
+        const int MaxRecordCount = 10000000;
+        const int maxPossibleChangings = 100;
+        string runFileName = @"..\run.dat";
+        int numberOfTests;
+        del test;
+        BplusTree tree;
+        EWAHIndex compressedBmp;
+        BitmapIndex bmp;
+        string[] sortedKeys;
+        List<int>[] listOfRids;
+        long[] bulkLoadingElapsedTime = new long[3];
+        List<long>[] addingElapsedTime = new List<long>[3];
+        List<long>[] deletionElapsedTime = new List<long>[3];
+        List<long>[] searchingElapsedTime = new List<long>[3];
+        int m;
+        BuildingIndices.Pair[] pairs;
+        public Form1()
+        {
+            InitializeComponent();
+            if (!File.Exists(runFileName))
+            {
+                StreamWriter swriter = new StreamWriter(runFileName);
+                swriter.Close();
+            }
+            StreamReader reader = new StreamReader(runFileName);
+            string s = reader.ReadLine();
+            int counter = 0;
+            while (s != null)
+            {
+                listBox1.Items.Add(s);
+                s = reader.ReadLine();
+                counter++;
+            }
+            reader.Close();
+            numberOfTests = counter;
+        }
+
+        Adding form2;
+        internal bool isForm2Opened = false;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            form2 = new Adding(this, numberOfTests);
+            form2.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            test = null;
+            if (listBox1.SelectedIndex == -1)
+                return;
+            textBox1.Clear();
+            textBox1.AppendText("Идёт обработка файла с содержимым теста:");
+            textBox1.Refresh();
+            int testNum = listBox1.SelectedIndex; // мб без номера
+            string testName = (string)listBox1.Items[testNum];
+            string path = @"..\" + testName + ".dat";
+            if (File.Exists(path))
+            {
+                StreamReader reader;
+                // Проэкспериментировать с reader
+                try
+                {
+                    reader = new StreamReader(path); // reader.Close() once in catch?
+                    string s = reader.ReadLine();
+                    int keySize;
+                    if (!int.TryParse(s, out keySize))
+                    {
+                        reader.Close();
+                        throw new Exception();
+                    }
+                    if (keySize < 1 || keySize > 20)
+                    {
+                        reader.Close();
+                        throw new Exception();
+                    }
+                    s = reader.ReadLine();
+                    if (!int.TryParse(s, out m))
+                    {
+                        reader.Close();
+                        throw new Exception();
+                    }
+                    if (m < 2 || m > 20)
+                    {
+                        reader.Close();
+                        throw new Exception();
+                    }
+                    s = reader.ReadLine();
+                    string[] keys = new string[MaxRecordCount];
+                    int count = 0;
+                    while (s != "" && count < MaxRecordCount)
+                    {
+                        if (s.Length != keySize || s.Contains(' '))
+                        {
+                            reader.Close();
+                            throw new Exception();
+                        }
+                        keys[count] = s;
+                        s = reader.ReadLine();
+                        count++;
+                    }
+                    if (s != "" || count < m)
+                    {
+                        reader.Close();
+                        throw new Exception();
+                    }
+                    Methods.SortKeys(keys, count, out sortedKeys, out listOfRids);
+                    test += BulkLoad;
+                    pairs = new BuildingIndices.Pair[maxPossibleChangings];
+                    int changingsCount = 0;
+                    s = reader.ReadLine();
+                    while (s != null && changingsCount < maxPossibleChangings)
+                    {
+                        string[] strAr = s.Split();
+                        if (strAr.Length != 2)
+                        {
+                            reader.Close();
+                            throw new Exception();
+                        }
+                        if (strAr[1].Length != keySize || strAr[1].Contains(' '))
+                        {
+                            reader.Close();
+                            throw new Exception();
+                        }
+                        switch (strAr[0])
+                        {
+                            case "put":
+                                test += Put;
+                                pairs[changingsCount] = new BuildingIndices.Pair(strAr[1], count);
+                                count++;
+                                break;
+                            case "delete":
+                                test += Delete;
+                                pairs[changingsCount] = new BuildingIndices.Pair(strAr[1], 0);
+                                break;
+                            case "search":
+                                test += Search;
+                                pairs[changingsCount] = new BuildingIndices.Pair(strAr[1], 0);
+                                break;
+                            default:
+                                reader.Close();
+                                throw new Exception();
+                        }
+                        s = reader.ReadLine();
+                        changingsCount++;
+                    }
+                    if (s != null)
+                    {
+                        reader.Close();
+                        throw new Exception();
+                    }
+                    reader.Close();
+                }
+                catch
+                {
+                    MessageBox.Show("Файл с тестом повреждён!", "Ошибка!");
+                    listBox1.Items.RemoveAt(testNum);
+                    reenterRun();
+                    textBox1.Text = "Ошибка при обработке теста!";
+                    return;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Файл с содержимым выбранного теста не найден!", "Ошибка!");
+                listBox1.Items.RemoveAt(testNum);
+                reenterRun();
+                textBox1.Text = "Ошибка при обработке теста!";
+                return;
+            }
+            textBox1.Text += Environment.NewLine + "Тест успешно обработан";
+            textBox1.Refresh();
+            for (int i = 0; i < addingElapsedTime.Length; i++)
+                addingElapsedTime[i] = new List<long>();
+            for (int i = 0; i < deletionElapsedTime.Length; i++)
+                deletionElapsedTime[i] = new List<long>();
+            for (int i = 0; i < searchingElapsedTime.Length; i++)
+                searchingElapsedTime[i] = new List<long>();
+            int a = 0;
+            test(ref a);
+            tree = null;
+            bmp = null;
+            compressedBmp = null;
+            sortedKeys = null;
+            listOfRids = null; ;
+            long[] addingAverageValues = new long[3];
+            long[] deletionAverageValues = new long[3];
+            long[] searchingAverageValues = new long[3];
+            for (int i = 0; i < addingAverageValues.Length; i++)
+                addingAverageValues[i] = (addingElapsedTime[i].Count != 0) ? (long)addingElapsedTime[i].Average() : 0;
+            for (int i = 0; i < deletionAverageValues.Length; i++)
+                deletionAverageValues[i] = (deletionElapsedTime[i].Count != 0) ? (long)deletionElapsedTime[i].Average() : 0;
+            for (int i = 0; i < searchingAverageValues.Length; i++)
+                searchingAverageValues[i] = (searchingElapsedTime[i].Count != 0) ? (long)searchingElapsedTime[i].Average() : 0;
+            Form2 form2 = new Form2(bulkLoadingElapsedTime, addingAverageValues, deletionAverageValues,
+                searchingAverageValues);
+            form2.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int i = listBox1.SelectedIndex;
+            if (i < 0)
+                return;
+            listBox1.Items.RemoveAt(i);
+            reenterRun();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex < 0)
+                return;
+            int testNum = listBox1.SelectedIndex;
+            string testName = (string)listBox1.Items[listBox1.SelectedIndex];
+            string fileName = @"..\" + testName + ".dat";
+            int keySize, changingsCount, startCount;
+            string[] keys;
+            List<string> acts = new List<string>();
+            if (!File.Exists(fileName))
+            {
+                MessageBox.Show("Файл с содержимым теста не найден!", "Ошибка!",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                listBox1.Items.RemoveAt(testNum);
+                reenterRun();
+                return;
+            }
+            StreamReader reader;
+            try
+            {
+                reader = new StreamReader(fileName);
+                string s = reader.ReadLine();
+                if (!int.TryParse(s, out keySize))
+                {
+                    reader.Close();
+                    throw new Exception();
+                }
+                if (keySize < 1 || keySize > 20)
+                {
+                    reader.Close();
+                    throw new Exception();
+                }
+                s = reader.ReadLine();
+                if (!int.TryParse(s, out m))
+                {
+                    reader.Close();
+                    throw new Exception();
+                }
+                if (m < 2 || m > 20)
+                {
+                    reader.Close();
+                    throw new Exception();
+                }
+                s = reader.ReadLine();
+                keys = new string[MaxRecordCount];
+                int count = 0;
+                while (s != "" && count < MaxRecordCount)
+                {
+                    if (s.Length != keySize || s.Contains(' '))
+                    {
+                        reader.Close();
+                        throw new Exception();
+                    }
+                    keys[count] = s;
+                    s = reader.ReadLine();
+                    count++;
+                }
+                if (s != "" || count < m)
+                {
+                    reader.Close();
+                    throw new Exception();
+                }
+                acts.Add("Построить индекс");
+                startCount = count;
+                changingsCount = 0;
+                s = reader.ReadLine();
+                while (s != null && changingsCount < maxPossibleChangings)
+                {
+                    string[] strAr = s.Split();
+                    if (strAr.Length != 2)
+                    {
+                        reader.Close();
+                        throw new Exception();
+                    }
+                    if (strAr[1].Length != keySize || strAr[1].Contains(' '))
+                    {
+                        reader.Close();
+                        throw new Exception();
+                    }
+                    switch (strAr[0])
+                    {
+                        case "put":
+                            acts.Add(String.Format("Добавить запись ({0} {1})", strAr[1], count));
+                            count++;
+                            break;
+                        case "delete":
+                            acts.Add(String.Format("Удалить ключ {0}", strAr[1]));
+                            break;
+                        case "search":
+                            acts.Add(String.Format("Поиск записи по ключу {0}", strAr[1]));
+                            break;
+                        default:
+                            reader.Close();
+                            throw new Exception();
+                    }
+                    s = reader.ReadLine();
+                    changingsCount++;
+                }
+                if (s != null)
+                {
+                    reader.Close();
+                    throw new Exception();
+                }
+                reader.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Файл с тестом повреждён!", "Ошибка!");
+                listBox1.Items.RemoveAt(testNum);
+                reenterRun();
+                return;
+            }
+            Adding form2 = new Adding(this, numberOfTests, testNum, keySize, m, keys, startCount, acts, changingsCount);
+            form2.Show();
+        }
+    }
+}
+

@@ -1,0 +1,10 @@
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\EWAHBitmap\EWAHBitmap\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\EWAHBitmap\EWAHBitmap\bin\Debug\EWAHBitmap.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\EWAHBitmap\EWAHBitmap\bin\Debug\EWAHBitmap.pdb
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\EWAHBitmap\EWAHBitmap\obj\Debug\EWAHBitmap.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\EWAHBitmap\EWAHBitmap\obj\Debug\EWAHBitmap.pdb
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\EWAHBitmap\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\EWAHBitmap\obj\Debug\EWAHBitmap.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\EWAHBitmap\bin\Debug\EWAHBitmap.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\EWAHBitmap\bin\Debug\EWAHBitmap.pdb
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\EWAHBitmap\obj\Debug\EWAHBitmap.pdb

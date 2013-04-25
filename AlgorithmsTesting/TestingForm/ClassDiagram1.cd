@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TestingForm.Adding">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BiAQGJUFBSkpQBAQACCAQQNCYMQ7AgAC0nEPBEAAgAo=</HashCode>
+      <FileName>Adding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestingForm.Form1">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="TestingForm.Form1.del" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Form1.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gQQAAEFBAiFQIBYLoEWQQFsCIAEAAAAIEgAAQAAgAAg=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestingForm.Form2">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAACACASABAAAACAIAAKAAAIEAAAAAAIAABIAAA=</HashCode>
+      <FileName>Form2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sorting.Pair">
+    <Position X="2.25" Y="18.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Sorting.Methods">
+    <Position X="0.5" Y="18.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EWAHBitmap.MarkerWord">
+    <Position X="6" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EWAHBitmap.WordArray">
+    <Position X="6" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EWAHBitmap.EWAHIndex">
+    <Position X="7.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bitmap.Bitmap">
+    <Position X="6" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Bitmap.BitmapIndex">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BPlusLib.Node">
+    <Position X="6.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BPlusLib.BplusTree">
+    <Position X="4.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Struct Name="EWAHBitmap.Pair">
+    <Position X="4.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+  </Struct>
+  <Struct Name="Bitmap.Pair">
+    <Position X="6.25" Y="3" Width="1.5" />
+    <TypeIdentifier />
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,10 @@
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\bitmap\bitmap\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\bitmap\bitmap\bin\Debug\bitmap.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\bitmap\bitmap\bin\Debug\bitmap.pdb
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\bitmap\bitmap\obj\Debug\bitmap.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\bitmap\bitmap\obj\Debug\bitmap.pdb
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\bitmap\bin\Debug\bitmap.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\bitmap\bin\Debug\bitmap.pdb
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\bitmap\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\bitmap\obj\Debug\bitmap.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\bitmap\obj\Debug\bitmap.pdb

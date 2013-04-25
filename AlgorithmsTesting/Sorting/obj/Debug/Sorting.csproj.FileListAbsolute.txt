@@ -1,0 +1,5 @@
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\Sorting\bin\Debug\Sorting.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\Sorting\bin\Debug\Sorting.pdb
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\Sorting\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\Sorting\obj\Debug\Sorting.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\Sorting\obj\Debug\Sorting.pdb

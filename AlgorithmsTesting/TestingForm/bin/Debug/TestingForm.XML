@@ -1,0 +1,641 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TestingForm</name>
+    </assembly>
+    <members>
+        <member name="M:TestingForm.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:TestingForm.Form2">
+            <summary>
+            Класс формы для отрисовки графических результатов теста
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form2.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form2.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:TestingForm.Form2.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form2.GetMaxBar(System.Int64[])">
+            <summary>
+            Метод, возвращающий максимальное число, которое будет отображено на верхнем делении диаграммы
+            </summary>
+            <param name="arr">Массив значений, которые должны быть графически отображены на диграмме</param>
+            <returns>Число, которое будет отображено на верхнем делении диаграммы</returns>
+        </member>
+        <member name="M:TestingForm.Form2.#ctor(System.Int64[],System.Int64[],System.Int64[],System.Int64[],System.String)">
+            <summary>
+            Конструктор экземпляра класса
+            </summary>
+            <param name="bulkLoadingElapsedTime">Массив величин, обозначающих время построеня индексов 
+            по трём алгоритмам</param>
+            <param name="addingAverageValues">Массив величин, обозначающих среднее время добавления 
+            записи в индекс по трём алгоритмам</param>
+            <param name="deletionAverageValues">Массив величин, обозначающих среднее время удаления 
+            ключа и всех номеров записей, соответствующих этому ключу, по трём алгоритмам</param>
+            <param name="searchingAverageValues">Массив величин, обозначающих среднее время поиска 
+            записи по ключу по трём алгоритмам</param>
+            <param name="testName">Название теста, результаты которого необоходимо вывести</param>
+        </member>
+        <member name="M:TestingForm.Form2.DrawGraph(System.Int64,System.Int64[],System.Windows.Forms.PaintEventArgs,System.Drawing.Point[])">
+            <summary>
+            Метод, отрисовывающий диаграмму
+            </summary>
+            <param name="max">Число на верхнем делении диаграммы</param>
+            <param name="arr">Массив величин, которые нужно отобразить на диаграмме</param>
+            <param name="e">Переменная для отрисовки</param>
+            <param name="points">Координаты трёх точек, задающих каркас диаграммы</param>
+        </member>
+        <member name="F:TestingForm.Form2.bulkLoadingElapsedTime">
+            <summary>
+            Массивы, хранящие времена построения, среднего времени добавления, удаления и поиска соответственно
+            (По трём алгоритмам)
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form2.addingAverageValues">
+            <summary>
+            Массивы, хранящие времена построения, среднего времени добавления, удаления и поиска соответственно
+            (По трём алгоритмам)
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form2.deletionAverageValues">
+            <summary>
+            Массивы, хранящие времена построения, среднего времени добавления, удаления и поиска соответственно
+            (По трём алгоритмам)
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form2.searchingAverageValues">
+            <summary>
+            Массивы, хранящие времена построения, среднего времени добавления, удаления и поиска соответственно
+            (По трём алгоритмам)
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form2.maxGraphBul">
+            <summary>
+            Значения верхних делений каждой из четырёх диаграмм
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form2.maxGraphAdd">
+            <summary>
+            Значения верхних делений каждой из четырёх диаграмм
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form2.maxGraphDel">
+            <summary>
+            Значения верхних делений каждой из четырёх диаграмм
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form2.maxGraphSearch">
+            <summary>
+            Значения верхних делений каждой из четырёх диаграмм
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form2.pictureBox1_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Отрисовка элемента управления pictureBox
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:TestingForm.Adding">
+            <summary>
+            Форма добавления/изменения тестов
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.MaxRecordCount">
+            <summary>
+            Максимально допустимое число записей для построения индексов
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.maxActsCount">
+            <summary>
+            Максимально допустимое количество действий в тесте, помимо построения
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:TestingForm.Adding.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.generate(System.Int32,System.Int32)">
+            <summary>
+            Метод, генерирующий список ключей для построения индексов
+            </summary>
+            <param name="keysCount">Количество случайно генерируемых ключей</param>
+            <param name="recordsOnKey">Количество записей на каждый из генерируемых ключей</param>
+        </member>
+        <member name="M:TestingForm.Adding.checkBulk(System.String@)">
+            <summary>
+            Проверка корректности введённых данных при добавлении действия "Построить индекс"
+            </summary>
+            <param name="message">Сообщение об ошибке в случае, если какие-то данные некорректны</param>
+            <returns>true, если данные введены корректно, и false в обратном случае</returns>
+        </member>
+        <member name="M:TestingForm.Adding.checkPut(System.String@,System.String@,System.Int32@)">
+            <summary>
+            Проверка корректности введённых данных при добавлении действия "Добавить запись"
+            </summary>
+            <param name="message">Сообщение об ошибке в случае, если какие-то данные некорректны</param>
+            <param name="key">Возвращаемое значение поля "ключ"</param>
+            <param name="RID">Возвращаемое значение поля "Номер записи"</param>
+            <returns>true, если данные введены корректно, и false в обратном случае</returns>
+        </member>
+        <member name="M:TestingForm.Adding.checkDelete(System.String@,System.String@)">
+            <summary>
+            Проверка корректности введённых данных при добавлении действия "Удалить ключ"
+            </summary>
+            <param name="message">Сообщение об ошибке в случае, если какие-то данные некорректны</param>
+            <param name="key">Возвращаемое значение поля "ключ"</param>
+            <returns>true, если данные введены корректно, и false в обратном случае</returns>
+        </member>
+        <member name="M:TestingForm.Adding.checkSearch(System.String@,System.String@)">
+            <summary>
+            Проверка корректности введённых данных при добавлении действия "Поиск записи по ключу"
+            </summary>
+            <param name="message">Сообщение об ошибке в случае, если какие-то данные некорректны</param>
+            <param name="key">Возвращаемое значение поля "ключ"</param>
+            <returns>true, если данные введены корректно, и false в обратном случае</returns>
+        </member>
+        <member name="F:TestingForm.Adding.bulkLoading">
+            <summary>
+            Булевы переменные, обозначающие, какое действие сейчас выбрано для добавления 
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.put">
+            <summary>
+            Булевы переменные, обозначающие, какое действие сейчас выбрано для добавления 
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.delete">
+            <summary>
+            Булевы переменные, обозначающие, какое действие сейчас выбрано для добавления 
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.search">
+            <summary>
+            Булевы переменные, обозначающие, какое действие сейчас выбрано для добавления 
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.genData">
+            <summary>
+            Булевы переменные, обозначающие, какое какой способ построения массива ключей выбран пользователем.
+            Из файла и генерируемый соответственно
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.fromFile">
+            <summary>
+            Булевы переменные, обозначающие, какое какой способ построения массива ключей выбран пользователем.
+            Из файла и генерируемый соответственно
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.EnabledComponents(System.Boolean)">
+            <summary>
+            Метод, обозначающий свойство Enabled части компонентов формы 
+            согласно значению булевой переменной из параметров
+            </summary>
+            <param name="enabled">Булева переменная, задающая свойство Enabled некоторым компонентам</param>
+        </member>
+        <member name="M:TestingForm.Adding.AllToInvisible">
+            <summary>
+            Метод, переводящий часть компонентов формы в невидимое для пользователя состояние
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.BulkLoadingToVisible">
+            <summary>
+            Метод, переводящий часть компонентов формы, отвечающих за действие "Построить индекс" 
+            в видимое для пользователя состояние
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.m">
+            <summary>
+            Максимальная степень вершин B+ tree
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.keySize">
+            <summary>
+            Размер ключа в символах
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.keys">
+            <summary>
+            Массив ключей, по которым будет производиться построение индексов
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.RIDsCount">
+            <summary>
+            Переменные, отвечающие за количество записей при создании списка действий в тесте
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.TotalRecordsCount">
+            <summary>
+            Переменные, отвечающие за количество записей при создании списка действий в тесте
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.currentRid">
+            <summary>
+            Переменные, отвечающие за количество записей при создании списка действий в тесте
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.nextTestName">
+            <summary>
+            Номер для имени следующего теста по умолчанию (testX, где X - номер)
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.currentTestNum">
+            <summary>
+            Номер данного теста в общем списке тестов 
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.tests">
+            <summary>
+            Массив имён добавленных тестов
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.actsCount">
+            <summary>
+            Количество добавленных с список действий, не считая действия "Построить индекс"
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.form1">
+            <summary>
+            Начальная форма, откуда вызвана данная форма добавления/изменения
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.#ctor(TestingForm.Form1,System.String,System.String[])">
+            <summary>
+            Конструктор экземпляра класса, испоьзуемый при создании новой формы для добавления теста
+            </summary>
+            <param name="form1">Ссылка на начальную форму, откуда вызвана данная форма добавления теста</param>
+            <param name="nextTestName">Номер для имени следующего теста по умолчанию (testX, где X - номер)</param>
+            <param name="tests">Массив имён добавленных тестов</param>
+        </member>
+        <member name="M:TestingForm.Adding.#ctor(TestingForm.Form1,System.String,System.Int32,System.String[],System.Int32,System.Int32,System.String[],System.Int32,System.Collections.Generic.List{System.String},System.Int32,System.Int32)">
+            <summary>
+            Конструктор экземпляра класса, используемый при создании новой формы 
+            для изменения выбранного из списка теста
+            </summary>
+            <param name="form1">Ссылка на начальную форму, откуда вызвана данная форма изменения теста</param>
+            <param name="nextTestName">Номер для имени следующего теста по умолчанию (testX, где X - номер)</param>
+            <param name="currentTestNum">Номер изменяемого теста в списке всех тестов</param>
+            <param name="tests">Массив имён добавленных тестов</param>
+            <param name="keySize">Размер ключа в изменяемом тесте</param>
+            <param name="m">Максимальная степень вершин B+ tree в изменяемом тесте</param>
+            <param name="keys">Массив кючей, по которому строятся индексы в изменяемом тесте</param>
+            <param name="count">Количество ключей в массиве</param>
+            <param name="acts">Список действий в изменяемом тесте</param>
+            <param name="changingsCount">Количество действий в изменяемом тесте, помимо помтроения индексов</param>
+            <param name="totalRIDs">Общее количество записей в индексах, добавляющихся в ходе выполнения теста</param>
+        </member>
+        <member name="M:TestingForm.Adding.OtherFeaturesToVisible">
+            <summary>
+            Метод, переводящий часть компонентов формы, отвечающих за действия добавления/удаления/поиска 
+            в видимое для пользователя состояние
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.button3_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события нажатия на кнопку "Добавить тест"/"Сохранить как новый" 
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.radioButton1_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события изменения выбора пользвователя в пользу пункта "Сгенерировать массив"
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.radioButton2_CheckedChanged(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события изменения выбора пользвователя в пользу пункта "Массив из файла"
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.comboBox1_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события изменения пользователем типа добавляемого действия (добавление/удаление/поиск)
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.button2_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события нажатия на кнопку "Добавить действие"/"Изменить действие"
+            Метод проверяет корректность введённых данных и добавляет действие список, 
+            или изменяет выбранное действие
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.fileOpened">
+            <summary>
+            Булева переменная, принимающая значения true, если был выбран файл с ключами для построения индексов,
+            и false в обратном случае
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.openedFileName">
+            <summary>
+            Путь к выбранному файлу с ключами для построения индексов.
+            Ключи в файе должны иметь длину в символах, уазанную в форме добавления/изменения.
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработка события нажатия на кнопку "Выбрать файл".
+            Открывается диалоговое окно, в котором пользователь должен указать файл с ключами.
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.bulkLoadingDeleted">
+            <summary>
+            Булева переменная, принимающая значение true, если было удалено действие "Построить индекс",
+            и false, если данное действие на месте, или ещё не было дабавлено никаких действий в список 
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.button4_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события нажатия на кнопку "Удалить выделенное".
+            Выбранное действие удаляется из списка, и, если было удалено действие "Построить индекс", 
+            часть формы "замораживается" до тех пор, пока не будет добавлено данное действие  
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.actChanged">
+            <summary>
+            Булева переменная, принимающая значение true, если пользователь указал для изменения действие, 
+            отличное от действия "Построить индекс", и false в остальных случаях
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.indexOfChangedAct">
+            <summary>
+            Номер изменённого действия в списке действий теста
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.fromAdding">
+            <summary>
+            Булева переменная, принимающая значение true, если некоторое действие было изменено с 
+            добавления на удаление/поиск, и flase в остальных случаях
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.fromOther">
+            <summary>
+            Булева переменная, принимающая значение true, если некоторое действие было изменено с 
+            удаления/поиска на добавление, и flase в остальных случаях
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.button5_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события нажатия на кнопку "Изменить выделенное действие".
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.button6_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события нажатия на кнопку "Утвердить"
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.button7_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события нажатия на кнопку "Изменить критерий"
+            </summary>
+        </member>
+        <member name="F:TestingForm.Adding.rewriteTest">
+            <summary>
+            Булева переменная, принимающая значение true, если пользватель нажал на кнопку "Изменить тест" 
+            в форме изменения, и false в остальных случаях
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.button8_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события нажатия на кнопку "Изменить тест"
+            </summary>
+        </member>
+        <member name="M:TestingForm.Adding.numericUpDown1_ValueChanged(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события изменения значения поля "Максимальная степень вершин B+ tree".
+            Меняется значение переменной m согласно новому значению поля
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:TestingForm.Form1">
+            <summary>
+            Класс главной формы проекта
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.MaxRecordCount">
+            <summary>
+            Максимально допустимое количество записей для построения индексов
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.maxPossibleChangings">
+            <summary>
+            Максимально допустимое количество действий в тесте, помимо построения
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form1.reenterRun">
+            <summary>
+            Метод, перезаписывающий файл run.dat
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form1.BulkLoad(System.Int32@)">
+            <summary>
+            Метод для делегата test - построение индексов
+            </summary>
+            <param name="count">Номер действия, не считая построения индекса</param>
+        </member>
+        <member name="M:TestingForm.Form1.Put(System.Int32@)">
+            <summary>
+            Метод для делегата test - добавление записи по ключу и номеру в индексы
+            </summary>
+            <param name="count">Номер действия, не считая построения индекса</param>
+        </member>
+        <member name="M:TestingForm.Form1.Delete(System.Int32@)">
+            <summary>
+            Метод для делегата test - удаление ключа и соответствующих ему номеров записей из индексов
+            </summary>
+            <param name="count">Номер действия, не считая построения индекса</param>
+        </member>
+        <member name="M:TestingForm.Form1.Search(System.Int32@)">
+            <summary>
+            Метод для делегата test - поиск записи по ключу в индексах
+            </summary>
+            <param name="count">Номер действия, не считая построения индекса</param>
+        </member>
+        <member name="M:TestingForm.Form1.AddTest(System.String)">
+            <summary>
+            Добавление нового теста в список
+            </summary>
+            <param name="testName"></param>
+        </member>
+        <member name="M:TestingForm.Form1.RenameTest(System.Int32,System.String)">
+            <summary>
+            Изменение имени существующего теста
+            </summary>
+            <param name="testNum">номер изменяемого теста</param>
+            <param name="newTestName">новое имя теста</param>
+        </member>
+        <member name="M:TestingForm.Form1.IncNum">
+            <summary>
+            Увелечение номера для имени нового теста по умолчанию (testX, где X - номер)
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.runFileName">
+            <summary>
+            Путь к файлу run.dat, используемого при запуске программы
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.test">
+            <summary>
+            Делегат, содержащий последовательность методов, соответствующих действиям в выбранном тесте
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.tree">
+            <summary>
+            Объект класса BplusTree
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.compressedBmp">
+            <summary>
+            Объект класса EWAHIndex
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.bmp">
+            <summary>
+            Объект класса BitmapIndex
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.sortedKeys">
+            <summary>
+            Отсортированный массив ключей для построения индексов
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.listOfRids">
+            <summary>
+            Массив списков номеров записей, соответствующих ключам из массива sortedKeys
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.bulkLoadingElapsedTime">
+            <summary>
+            Массив величин, обозначающих время построения индексов 
+            по трём алгоритмам
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.addingElapsedTime">
+            <summary>
+            Массив списков времён добавления записей в индекс по трём алгоритмам. 
+            Каждый список относится к одному из алгоритмов
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.deletionElapsedTime">
+            <summary>
+            Массив списков времён удаления ключей из индекса по трём алгоритмам. 
+            Каждый список относится к одному из алгоритмов
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.searchingElapsedTime">
+            <summary>
+            Массив списков времён поиска записей по ключу по трём алгоритмам. 
+            Каждый список относится к одному из алгоритмов
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.m">
+            <summary>
+            Максимальная стпепень вершин B+tree
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.pairs">
+            <summary>
+            Массив пар ключ/номер записи
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.nextTestNum">
+            <summary>
+            Номер для имени следующего теста по умолчанию (testX, где X - номер)
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form1.#ctor">
+            <summary>
+            Конструктор экземпляра класса
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form1.toolStripButton1_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события нажатия на кнопку добавления нового теста.
+            Запускается новая форма добавления
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form1.toolStripButton2_Click(System.Object,System.EventArgs)">
+            <summary>
+            Удаление теста из списка
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form1.toolStripButton3_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события нажатия на кнопку изменения выбранного теста.
+            Открывается новая форма добавления с уже занесёнными туда данными из файла теста
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form1.toolStripButton4_Click(System.Object,System.EventArgs)">
+            <summary>
+            Обработчик события нажатия на кнопку запуска выбранного теста.
+            Обрабатывается файл с тестом, по которому начинается тестирование алгоритмов
+            </summary>
+        </member>
+        <member name="F:TestingForm.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:TestingForm.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:TestingForm.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:TestingForm.Form1.del">
+            <summary>
+            Делегат-тип, используемый для хранения последовательностей действий выбранного теста
+            </summary>
+            <param name="count">Номер действия, не считая построения индекса</param>
+        </member>
+        <member name="T:TestingForm.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:TestingForm.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:TestingForm.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

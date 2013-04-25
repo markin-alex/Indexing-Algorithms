@@ -1,0 +1,10 @@
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\BPlusLib\BPlusLib\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\BPlusLib\BPlusLib\bin\Debug\BPlusLib.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\BPlusLib\BPlusLib\bin\Debug\BPlusLib.pdb
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\BPlusLib\BPlusLib\obj\Debug\BPlusLib.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\BPlusLib\BPlusLib\obj\Debug\BPlusLib.pdb
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\BPlusLib\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\BPlusLib\obj\Debug\BPlusLib.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\BPlusLib\bin\Debug\BPlusLib.dll
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\BPlusLib\bin\Debug\BPlusLib.pdb
+C:\Users\Алексей\Documents\Visual Studio 2008\Projects\AlgorithmsTesting\BPlusLib\obj\Debug\BPlusLib.pdb
